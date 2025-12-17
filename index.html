@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Blueprint | HireCharm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <style>
+        /* =================================================================
+           CAMPAIGN BLUEPRINT - Sophisticated Alchemy Theme
+           Premium partnership experience, not a survey
+           ================================================================= */
+
+        :root {
+            /* Core Palette - Warm & Premium */
+            --cream: #FBF7F0;
+            --cream-dark: #F5EDE0;
+            --cream-darker: #E8DBC8;
+
+            /* Gold Spectrum (Lead to Gold transformation) */
+            --lead: #6B7280;
+            --bronze: #CD7F32;
+            --gold: #D4AF37;
+            --gold-light: #F4D03F;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+
+            /* Accent - Royal Purple */
+            --purple: #7C3AED;
+            --purple-light: #A78BFA;
+            --purple-dark: #5B21B6;
+            --purple-glow: rgba(124, 58, 237, 0.15);
+
+            /* Text */
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-muted: #9CA3AF;
+
+            /* UI */
+            --border: #E5E7EB;
+            --border-focus: var(--purple);
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-lg: rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* =================================================================
+           TWO-PANE LAYOUT - Questions + Live Blueprint
+           ================================================================= */
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            min-height: 100vh;
+        }
+
+        /* Left Pane - Main Form */
+        .form-pane {
+            padding: 48px 60px;
+            max-width: 960px;
+            width: 100%;
+            /* Balance left/right margins within beige area */
+            margin: 0 auto;
+        }
+
+        /* Right Pane - Live Blueprint */
+        .blueprint-pane {
+            background: linear-gradient(180deg, #1F2937 0%, #111827 100%);
+            color: white;
+            padding: 36px 32px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* =================================================================
+           HEADER - Brand & Context
+           ================================================================= */
+
+        .header {
+            margin-bottom: 48px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .brand-text {
+            font-family: 'DM Serif Display', serif;
+            font-size: 24px;
+            color: var(--text-primary);
+        }
+
+        .page-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 42px;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 520px;
+        }
+
+        /* =================================================================
+           FORM SECTIONS - Chapters of the Blueprint
+           ================================================================= */
+
+        .sections-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            border-color: var(--cream-darker);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .section.active {
+            border-color: var(--purple-light);
+            box-shadow: 0 8px 24px var(--purple-glow);
+        }
+
+        .section.completed {
+            border-color: var(--gold);
+        }
+
+        .section-header {
+            padding: 20px 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: background 0.2s;
+        }
+
+        .section-header:hover {
+            background: var(--cream);
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--cream-dark);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .section.active .section-number {
+            background: var(--purple);
+            color: white;
+        }
+
+        .section.completed .section-number {
+            background: var(--gold);
+            color: white;
+        }
+
+        .section.completed .section-number::after {
+            content: '✓';
+        }
+
+        .section.completed .section-number span {
+            display: none;
+        }
+
+        .section-info {
+            flex: 1;
+        }
+
+        .section-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .section-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-description {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .section-time {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--cream);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .section-toggle {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: transform 0.3s;
+        }
+
+        .section.active .section-toggle {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .section.active .section-content {
+            max-height: 2000px;
+        }
+
+        .section-body {
+            padding: 0 24px 24px;
+        }
+
+        /* =================================================================
+           FORM FIELDS
+           ================================================================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-grid.single {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .required {
+            color: var(--purple);
+        }
+
+        /* Why We Ask Tooltip */
+        .why-tooltip {
+            position: relative;
+            display: inline-flex;
+            cursor: help;
+        }
+
+        .why-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--cream-dark);
+            color: var(--text-muted);
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .why-tooltip:hover .why-icon {
+            background: var(--purple);
+            color: white;
+        }
+
+        .why-content {
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            padding: 12px 16px;
+            background: var(--text-primary);
+            color: white;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.5;
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            z-index: 100;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .why-content::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--text-primary);
+        }
+
+        .why-tooltip:hover .why-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            background: white;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px var(--purple-glow);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 40px;
+        }
+
+        /* =================================================================
+           SECTION ACTIONS
+           ================================================================= */
+
+        .section-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cream);
+            border-color: var(--text-muted);
+        }
+
+        .btn-primary {
+            background: var(--purple);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--purple-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px var(--purple-glow);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--bronze) 100%);
+            border: none;
+            color: white;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px var(--gold-glow);
+        }
+
+        /* =================================================================
+           SYNTHESIS CONFIRMATION
+           ================================================================= */
+
+        .synthesis {
+            background: var(--cream);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .synthesis.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .synthesis-icon {
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            background: var(--gold);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            margin-right: 12px;
+        }
+
+        .synthesis-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .synthesis-text strong {
+            color: var(--text-primary);
+            font-style: normal;
+        }
+
+        /* =================================================================
+           LIVE BLUEPRINT PANE (Right Side)
+           ================================================================= */
+
+        .blueprint-header {
+            margin-bottom: 36px;
+        }
+
+        .blueprint-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 26px;
+            color: white;
+            margin-bottom: 6px;
+        }
+
+        .blueprint-subtitle {
+            font-size: 15px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .blueprint-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .blueprint-section {
+            opacity: 0.4;
+            transition: all 0.3s;
+        }
+
+        .blueprint-section.active {
+            opacity: 1;
+        }
+
+        .blueprint-section.completed {
+            opacity: 1;
+        }
+
+        .blueprint-section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .blueprint-section-title::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--lead);
+        }
+
+        .blueprint-section.active .blueprint-section-title::before {
+            background: var(--purple-light);
+            box-shadow: 0 0 8px var(--purple-light);
+        }
+
+        .blueprint-section.completed .blueprint-section-title::before {
+            background: var(--gold);
+            box-shadow: 0 0 8px var(--gold);
+        }
+
+        .blueprint-content {
+            font-size: 16px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .blueprint-content p {
+            margin-bottom: 8px;
+        }
+
+        .blueprint-content .placeholder {
+            color: rgba(255,255,255,0.3);
+            font-style: italic;
+        }
+
+        .blueprint-content .value {
+            color: var(--gold-light);
+        }
+
+        .blueprint-insight {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(124, 58, 237, 0.15);
+            border-radius: 8px;
+            border-left: 3px solid var(--purple-light);
+        }
+
+        .blueprint-insight-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--purple-light);
+            margin-bottom: 4px;
+        }
+
+        .blueprint-insight-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* =================================================================
+           DYNAMIC LISTS (Segments, Personas, Tags)
+           ================================================================= */
+
+        .dynamic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .dynamic-item {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .dynamic-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .dynamic-item-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .dynamic-item-remove {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .dynamic-item-remove:hover {
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+        }
+
+        .add-item-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-item-btn:hover {
+            border-color: var(--purple);
+            color: var(--purple);
+            background: var(--purple-glow);
+        }
+
+        /* Tag Input */
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            min-height: 48px;
+            cursor: text;
+        }
+
+        .tag-input-container:focus-within {
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px var(--purple-glow);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: var(--purple-glow);
+            color: var(--purple-dark);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .tag-remove {
+            background: none;
+            border: none;
+            color: var(--purple);
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .tag-input {
+            flex: 1;
+            min-width: 120px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        /* Checkbox Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--purple-light);
+        }
+
+        .checkbox-item.checked {
+            background: var(--purple-glow);
+            border-color: var(--purple);
+        }
+
+        .checkbox-item input {
+            display: none;
+        }
+
+        .checkbox-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .checkbox-item.checked .checkbox-box {
+            background: var(--purple);
+            border-color: var(--purple);
+            color: white;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        /* =================================================================
+           RESPONSIVE
+           ================================================================= */
+
+        @media (max-width: 1200px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+
+            .blueprint-pane {
+                display: none;
+            }
+
+            .form-pane {
+                max-width: 720px;
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .form-pane {
+                padding: 24px 16px;
+            }
+
+            .page-title {
+                font-size: 32px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- LEFT PANE: Form -->
+        <div class="form-pane">
+            <!-- Header -->
+            <header class="header">
+                <div class="brand">
+                    <div class="brand-icon">✦</div>
+                    <div class="brand-text">HireCharm</div>
+                </div>
+                <h1 class="page-title">Your Campaign Blueprint</h1>
+                <p class="page-subtitle">Let's craft your growth formula together. This brief intake helps us understand your business so we can build campaigns that actually convert.</p>
+            </header>
+
+            <!-- Form Sections -->
+            <form id="onboardingForm" class="sections-container">
+
+                <!-- Section 1: Foundation -->
+                <div class="section active" data-section="1">
+                    <div class="section-header" onclick="toggleSection(1)">
+                        <div class="section-number"><span>1</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Laying the Foundation</h2>
+                            <div class="section-meta">
+                                <span class="section-description">The essential ingredients</span>
+                                <span class="section-time">~2 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Company Name <span class="required">*</span>
+                                    </label>
+                                    <input type="text" class="form-input" name="company_name" placeholder="e.g., Acme Corp" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Website
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">We'll analyze your site to understand your positioning, messaging, and customer base—saving you time on explaining your business.</span>
+                                        </span>
+                                    </label>
+                                    <input type="url" class="form-input" name="website" placeholder="https://yourcompany.com">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Your Name <span class="required">*</span></label>
+                                    <input type="text" class="form-input" name="contact_name" placeholder="First and last name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email <span class="required">*</span></label>
+                                    <input type="email" class="form-input" name="contact_email" placeholder="you@company.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Team Size</label>
+                                    <select class="form-select" name="employee_count">
+                                        <option value="">Select size...</option>
+                                        <option value="1-10">1-10 employees</option>
+                                        <option value="11-50">11-50 employees</option>
+                                        <option value="51-100">51-100 employees</option>
+                                        <option value="101-250">101-250 employees</option>
+                                        <option value="251-500">251-500 employees</option>
+                                        <option value="500+">500+ employees</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Funding Stage</label>
+                                    <select class="form-select" name="funding_stage">
+                                        <option value="">Select stage...</option>
+                                        <option value="Pre-seed">Pre-seed</option>
+                                        <option value="Seed">Seed</option>
+                                        <option value="Series A">Series A</option>
+                                        <option value="Series B">Series B</option>
+                                        <option value="Series C+">Series C+</option>
+                                        <option value="Bootstrapped">Bootstrapped</option>
+                                        <option value="Public">Public</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label">Headquarters</label>
+                                    <input type="text" class="form-input" name="hq_location" placeholder="City, Country">
+                                </div>
+                            </div>
+
+                            <div class="synthesis" id="synthesis-1">
+                                <span class="synthesis-icon">✓</span>
+                                <span class="synthesis-text">Understood. We'll begin crafting a strategy for <strong id="synth-company">your company</strong>.</span>
+                            </div>
+
+                            <div class="section-actions">
+                                <div></div>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(2)">
+                                    Proceed →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Your Offering -->
+                <div class="section" data-section="2">
+                    <div class="section-header" onclick="toggleSection(2)">
+                        <div class="section-number"><span>2</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Your Offering</h2>
+                            <div class="section-meta">
+                                <span class="section-description">What you sell and to whom</span>
+                                <span class="section-time">~3 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-grid single">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        What core product or service do you sell?
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">A clear articulation helps us write messaging that resonates. Don't worry about perfection—just describe it naturally.</span>
+                                        </span>
+                                    </label>
+                                    <textarea class="form-textarea" name="core_product" placeholder="Describe your main offering in a few sentences..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Who do you sell to? (in your own words)</label>
+                                    <textarea class="form-textarea" name="target_customer" placeholder="Describe your ideal customer—industry, company size, role..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Annual Revenue
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">Revenue context helps us calibrate campaign scale and messaging sophistication appropriately.</span>
+                                        </span>
+                                    </label>
+                                    <select class="form-select" name="annual_revenue">
+                                        <option value="">Select range...</option>
+                                        <option value="<$1M">Less than $1M</option>
+                                        <option value="$1-5M">$1M - $5M</option>
+                                        <option value="$5-20M">$5M - $20M</option>
+                                        <option value="$20M+">$20M+</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Average Contract Value (ACV)</label>
+                                    <input type="text" class="form-input" name="acv" placeholder="e.g., $25,000/year">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Typical Sales Cycle</label>
+                                    <select class="form-select" name="sales_cycle_length">
+                                        <option value="">Select length...</option>
+                                        <option value="< 1 week">Less than 1 week</option>
+                                        <option value="1-4 weeks">1-4 weeks</option>
+                                        <option value="1-3 months">1-3 months</option>
+                                        <option value="3+ months">3+ months</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Self-Serve vs Sales-Led
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">This influences whether we optimize for product signups or sales conversations.</span>
+                                        </span>
+                                    </label>
+                                    <select class="form-select" name="self_serve_pct">
+                                        <option value="">Select mix...</option>
+                                        <option value="0">100% Sales-led</option>
+                                        <option value="25">75% Sales / 25% Self-serve</option>
+                                        <option value="50">50/50 Mix</option>
+                                        <option value="75">75% Self-serve / 25% Sales</option>
+                                        <option value="100">100% Self-serve</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="section-actions">
+                                <button type="button" class="btn btn-secondary" onclick="goToSection(1)">← Revisit</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(3)">Proceed →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Market & Signals -->
+                <div class="section" data-section="3">
+                    <div class="section-header" onclick="toggleSection(3)">
+                        <div class="section-number"><span>3</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Market &amp; Signals</h2>
+                            <div class="section-meta">
+                                <span class="section-description">Your segments and buying triggers</span>
+                                <span class="section-time">~4 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-group full-width">
+                                <label class="form-label" style="margin-bottom: 12px;">
+                                    Customer Segments
+                                    <span class="why-tooltip">
+                                        <span class="why-icon">?</span>
+                                        <span class="why-content">Different segments need different messaging. We'll craft unique angles for each.</span>
+                                    </span>
+                                </label>
+                                <div class="dynamic-list" id="segmentsList">
+                                    <div class="dynamic-item" data-index="0">
+                                        <div class="dynamic-item-header">
+                                            <span class="dynamic-item-title">Segment 1</span>
+                                            <button type="button" class="dynamic-item-remove" onclick="removeSegment(0)" style="display: none;">✕</button>
+                                        </div>
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label class="form-label">Segment Name</label>
+                                                <input type="text" class="form-input" name="segments[0].name" placeholder="e.g., Enterprise SaaS">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">% of Revenue</label>
+                                                <input type="number" class="form-input" name="segments[0].revenue_pct" placeholder="e.g., 60" min="0" max="100">
+                                            </div>
+                                            <div class="form-group full-width">
+                                                <label class="form-label">What makes this segment unique?</label>
+                                                <input type="text" class="form-input" name="segments[0].unique_characteristics" placeholder="Key characteristics or needs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="add-item-btn" onclick="addSegment()">
+                                    <span>+</span> Add Another Segment
+                                </button>
+                            </div>
+
+                            <div class="form-group full-width" style="margin-top: 24px;">
+                                <label class="form-label" style="margin-bottom: 12px;">
+                                    High-Intent Signals
+                                    <span class="why-tooltip">
+                                        <span class="why-icon">?</span>
+                                        <span class="why-content">These triggers tell us when a prospect is most likely to be receptive to outreach.</span>
+                                    </span>
+                                </label>
+                                <div class="checkbox-grid" id="signalsGrid">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="New funding raised">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">New funding raised</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Leadership change">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Leadership change</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Job postings (specific roles)">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Job postings (specific roles)</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Tech stack changes">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Tech stack changes</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Company expansion">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Company expansion</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Product launch">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Product launch</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Industry event attendance">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Industry event attendance</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="signals" value="Content engagement">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Content engagement</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width" style="margin-top: 24px;">
+                                <label class="form-label">Dream Customers</label>
+                                <textarea class="form-textarea" name="aspirational_customers" placeholder="Which specific companies would you love to land? (We'll see what we can do 😉)"></textarea>
+                            </div>
+
+                            <div class="section-actions">
+                                <button type="button" class="btn btn-secondary" onclick="goToSection(2)">← Revisit</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(4)">Proceed →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Your Audience -->
+                <div class="section" data-section="4">
+                    <div class="section-header" onclick="toggleSection(4)">
+                        <div class="section-number"><span>4</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Your Audience</h2>
+                            <div class="section-meta">
+                                <span class="section-description">The people you're trying to reach</span>
+                                <span class="section-time">~5 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-group full-width">
+                                <label class="form-label" style="margin-bottom: 8px;">Target Job Titles</label>
+                                <div class="tag-input-container" id="jobTitlesContainer" onclick="document.getElementById('jobTitleInput').focus()">
+                                    <input type="text" class="tag-input" id="jobTitleInput" placeholder="Type a title and press Enter...">
+                                </div>
+                                <input type="hidden" name="job_titles" id="jobTitlesHidden">
+                            </div>
+
+                            <div class="form-group full-width" style="margin-top: 24px;">
+                                <label class="form-label" style="margin-bottom: 12px;">Buyer Personas</label>
+                                <div class="dynamic-list" id="personasList">
+                                    <div class="dynamic-item" data-index="0">
+                                        <div class="dynamic-item-header">
+                                            <span class="dynamic-item-title">Persona 1</span>
+                                            <button type="button" class="dynamic-item-remove" onclick="removePersona(0)" style="display: none;">✕</button>
+                                        </div>
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label class="form-label">Job Title</label>
+                                                <input type="text" class="form-input" name="personas[0].job_title" placeholder="e.g., VP of Sales">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label">Primary Segment</label>
+                                                <input type="text" class="form-input" name="personas[0].primary_segment" placeholder="Which segment?">
+                                            </div>
+                                            <div class="form-group full-width">
+                                                <label class="form-label">What pain do they feel before buying?</label>
+                                                <input type="text" class="form-input" name="personas[0].pain_before_buying" placeholder="Their key frustrations">
+                                            </div>
+                                            <div class="form-group full-width">
+                                                <label class="form-label">What's their "aha moment" with your product?</label>
+                                                <input type="text" class="form-input" name="personas[0].aha_moment" placeholder="When they realize the value">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="add-item-btn" onclick="addPersona()">
+                                    <span>+</span> Add Another Persona
+                                </button>
+                            </div>
+
+                            <div class="form-grid single" style="margin-top: 24px;">
+                                <div class="form-group">
+                                    <label class="form-label">Common objections you hear</label>
+                                    <textarea class="form-textarea" name="common_objections" placeholder="What pushback do you typically get?"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">What triggers them to start shopping?</label>
+                                    <textarea class="form-textarea" name="shopping_triggers" placeholder="Events or situations that create urgency"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-grid" style="margin-top: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label">Who do prospects compare you to?</label>
+                                    <input type="text" class="form-input" name="competitor_comparison" placeholder="Main competitors">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">What can you do that they can't?</label>
+                                    <input type="text" class="form-input" name="unique_differentiators" placeholder="Your unfair advantage">
+                                </div>
+                            </div>
+
+                            <div class="section-actions">
+                                <button type="button" class="btn btn-secondary" onclick="goToSection(3)">← Revisit</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(5)">Proceed →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: The Process -->
+                <div class="section" data-section="5">
+                    <div class="section-header" onclick="toggleSection(5)">
+                        <div class="section-number"><span>5</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Mapping the Process</h2>
+                            <div class="section-meta">
+                                <span class="section-description">Your current sales &amp; outbound approach</span>
+                                <span class="section-time">~4 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-group full-width">
+                                <label class="form-label" style="margin-bottom: 12px;">
+                                    Current Outbound Tools
+                                    <span class="why-tooltip">
+                                        <span class="why-icon">?</span>
+                                        <span class="why-content">We'll integrate with your existing stack rather than reinventing the wheel.</span>
+                                    </span>
+                                </label>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="outbound_tools" value="Apollo">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Apollo</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="outbound_tools" value="Instantly">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Instantly</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="outbound_tools" value="Outreach">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Outreach</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="outbound_tools" value="Salesloft">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Salesloft</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="outbound_tools" value="HubSpot">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">HubSpot</span>
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="outbound_tools" value="Salesforce">
+                                        <span class="checkbox-box">✓</span>
+                                        <span class="checkbox-label">Salesforce</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-grid" style="margin-top: 24px;">
+                                <div class="form-group">
+                                    <label class="form-label">Monthly Outbound Volume</label>
+                                    <select class="form-select" name="monthly_email_volume">
+                                        <option value="">Select volume...</option>
+                                        <option value="< 1,000">Less than 1,000 emails</option>
+                                        <option value="1,000 - 5,000">1,000 - 5,000 emails</option>
+                                        <option value="5,000 - 20,000">5,000 - 20,000 emails</option>
+                                        <option value="20,000+">20,000+ emails</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Current Open Rate</label>
+                                    <input type="text" class="form-input" name="current_open_rate" placeholder="e.g., 45%">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Current Reply Rate</label>
+                                    <input type="text" class="form-input" name="current_reply_rate" placeholder="e.g., 3%">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Other Channels Used</label>
+                                    <input type="text" class="form-input" name="other_channels" placeholder="LinkedIn, Cold calling, etc.">
+                                </div>
+                            </div>
+
+                            <div class="form-grid single" style="margin-top: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Messages that have worked
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">We'll build on what's already working rather than starting from scratch.</span>
+                                        </span>
+                                    </label>
+                                    <textarea class="form-textarea" name="best_messages" placeholder="Share subject lines, angles, or approaches that got good responses"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Approaches that failed</label>
+                                    <textarea class="form-textarea" name="failed_approaches" placeholder="What have you tried that didn't work?"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="section-actions">
+                                <button type="button" class="btn btn-secondary" onclick="goToSection(4)">← Revisit</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(6)">Proceed →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Your Messaging -->
+                <div class="section" data-section="6">
+                    <div class="section-header" onclick="toggleSection(6)">
+                        <div class="section-number"><span>6</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Your Messaging</h2>
+                            <div class="section-meta">
+                                <span class="section-description">Stories, proof points &amp; tone</span>
+                                <span class="section-time">~4 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-grid single">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        How do your best customers describe you?
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">Customer language converts better than marketing speak. We'll use their words.</span>
+                                        </span>
+                                    </label>
+                                    <textarea class="form-textarea" name="customer_voice" placeholder="In their own words, what do they say about working with you?"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Specific results or ROI you can reference</label>
+                                    <textarea class="form-textarea" name="roi_results" placeholder="e.g., 'Reduced churn by 40%' or 'Saved 10 hours/week'"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Case studies for each segment</label>
+                                    <textarea class="form-textarea" name="case_studies_description" placeholder="Brief descriptions of success stories by segment"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-grid" style="margin-top: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label">Industry jargon to use (or avoid)</label>
+                                    <input type="text" class="form-input" name="industry_jargon" placeholder="Terms that resonate or repel">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tone &amp; style that resonates</label>
+                                    <select class="form-select" name="tone_style">
+                                        <option value="">Select tone...</option>
+                                        <option value="Professional &amp; formal">Professional &amp; formal</option>
+                                        <option value="Friendly &amp; conversational">Friendly &amp; conversational</option>
+                                        <option value="Direct &amp; no-nonsense">Direct &amp; no-nonsense</option>
+                                        <option value="Witty &amp; playful">Witty &amp; playful</option>
+                                        <option value="Technical &amp; precise">Technical &amp; precise</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="section-actions">
+                                <button type="button" class="btn btn-secondary" onclick="goToSection(5)">← Revisit</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(7)">Proceed →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 7: Your Goals -->
+                <div class="section" data-section="7">
+                    <div class="section-header" onclick="toggleSection(7)">
+                        <div class="section-number"><span>7</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Your Goals</h2>
+                            <div class="section-meta">
+                                <span class="section-description">What success looks like together</span>
+                                <span class="section-time">~2 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label class="form-label">Primary GTM Objective</label>
+                                    <select class="form-select" name="primary_gtm_objective">
+                                        <option value="">Select your primary goal...</option>
+                                        <option value="Pipeline Generation">Pipeline Generation</option>
+                                        <option value="Brand Awareness">Brand Awareness</option>
+                                        <option value="Market Expansion">Market Expansion</option>
+                                        <option value="Product Launch">Product Launch</option>
+                                        <option value="Competitive Displacement">Competitive Displacement</option>
+                                        <option value="Account Expansion">Account Expansion</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-grid single" style="margin-top: 16px;">
+                                <div class="form-group">
+                                    <label class="form-label">How do you measure GTM success today?</label>
+                                    <textarea class="form-textarea" name="success_metrics" placeholder="What KPIs and metrics do you track?"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        What would make this engagement a massive win?
+                                        <span class="why-tooltip">
+                                            <span class="why-icon">?</span>
+                                            <span class="why-content">This helps us set the bar correctly and focus on what actually moves the needle for you.</span>
+                                        </span>
+                                    </label>
+                                    <textarea class="form-textarea" name="success_definition" placeholder="Describe your dream outcome from working together..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Anything else we should know?</label>
+                                    <textarea class="form-textarea" name="additional_notes" placeholder="Additional context, constraints, or requests"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="section-actions">
+                                <button type="button" class="btn btn-secondary" onclick="goToSection(6)">← Revisit</button>
+                                <button type="button" class="btn btn-primary" onclick="proceedToSection(8)">Proceed →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 8: Review & Submit -->
+                <div class="section" data-section="8">
+                    <div class="section-header" onclick="toggleSection(8)">
+                        <div class="section-number"><span>✦</span></div>
+                        <div class="section-info">
+                            <h2 class="section-title">Review &amp; Submit</h2>
+                            <div class="section-meta">
+                                <span class="section-description">Confirm your blueprint</span>
+                                <span class="section-time">~1 min</span>
+                            </div>
+                        </div>
+                        <div class="section-toggle">▼</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="section-body">
+                            <div class="review-summary">
+                                <p style="font-size: 16px; color: var(--text-secondary); margin-bottom: 24px;">
+                                    Take a moment to review your blueprint in the panel on the right. Once you're satisfied, submit to begin the process.
+                                </p>
+
+                                <div class="review-checklist" style="background: var(--cream); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                                    <h3 style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;">Blueprint Summary</h3>
+
+                                    <div class="review-items" style="display: flex; flex-direction: column; gap: 12px;">
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-1" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">1</span>
+                                            <span style="color: var(--text-secondary);">Foundation — <span id="review-company" style="color: var(--text-primary);">Company info</span></span>
+                                        </div>
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-2" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">2</span>
+                                            <span style="color: var(--text-secondary);">Offering — <span id="review-product" style="color: var(--text-primary);">Product &amp; target</span></span>
+                                        </div>
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-3" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">3</span>
+                                            <span style="color: var(--text-secondary);">Market — <span id="review-segments" style="color: var(--text-primary);">Segments &amp; signals</span></span>
+                                        </div>
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-4" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">4</span>
+                                            <span style="color: var(--text-secondary);">Audience — <span id="review-personas" style="color: var(--text-primary);">Personas &amp; titles</span></span>
+                                        </div>
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-5" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">5</span>
+                                            <span style="color: var(--text-secondary);">Process — <span id="review-process" style="color: var(--text-primary);">Outbound approach</span></span>
+                                        </div>
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-6" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">6</span>
+                                            <span style="color: var(--text-secondary);">Messaging — <span id="review-messaging" style="color: var(--text-primary);">Tone &amp; proof points</span></span>
+                                        </div>
+                                        <div class="review-item" style="display: flex; align-items: center; gap: 12px;">
+                                            <span class="review-check" id="review-check-7" style="width: 24px; height: 24px; border-radius: 50%; background: var(--cream-darker); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted);">7</span>
+                                            <span style="color: var(--text-secondary);">Goals — <span id="review-goals" style="color: var(--text-primary);">Success criteria</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p style="font-size: 14px; color: var(--text-muted); text-align: center;">
+                                    Need to make changes? Click any section above to edit.
+                                </p>
+                            </div>
+
+                            <div class="section-actions" style="justify-content: center;">
+                                <button type="submit" class="btn btn-gold" style="padding: 16px 48px; font-size: 16px;">
+                                    ✦ Submit Blueprint
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- RIGHT PANE: Live Blueprint -->
+        <aside class="blueprint-pane">
+            <div class="blueprint-header">
+                <h2 class="blueprint-title">Your Blueprint</h2>
+                <p class="blueprint-subtitle">Building in real-time as you share</p>
+            </div>
+
+            <div class="blueprint-sections">
+                <div class="blueprint-section active" data-bp="1">
+                    <div class="blueprint-section-title">Foundation</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-company">Company name will appear here</span></p>
+                        <p><span class="placeholder" id="bp-contact">Your point of contact</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="2">
+                    <div class="blueprint-section-title">Offering</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-product">What you offer</span></p>
+                        <p><span class="placeholder" id="bp-target">Who you serve</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="3">
+                    <div class="blueprint-section-title">Market</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-segments">Your market segments</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="4">
+                    <div class="blueprint-section-title">Audience</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-personas">Buyer personas</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="5">
+                    <div class="blueprint-section-title">Process</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-process">Your outbound approach</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="6">
+                    <div class="blueprint-section-title">Messaging</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-messaging">Stories &amp; proof points</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="7">
+                    <div class="blueprint-section-title">Goals</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-goals">Your success criteria</span></p>
+                    </div>
+                </div>
+
+                <div class="blueprint-section" data-bp="8">
+                    <div class="blueprint-section-title">Review</div>
+                    <div class="blueprint-content">
+                        <p><span class="placeholder" id="bp-review">Ready to submit</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blueprint-insight" id="blueprintInsight" style="display: none;">
+                <div class="blueprint-insight-label">💡 Insight</div>
+                <div class="blueprint-insight-text" id="insightText"></div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // =================================================================
+        // STATE MANAGEMENT
+        // =================================================================
+
+        let currentSection = 1;
+        let completedSections = new Set();
+        let formData = {};
+        let segments = [{ name: '', revenue_pct: '', unique_characteristics: '' }];
+        let personas = [{ job_title: '', primary_segment: '', pain_before_buying: '', aha_moment: '' }];
+        let jobTitles = [];
+
+        // =================================================================
+        // SECTION NAVIGATION
+        // =================================================================
+
+        function toggleSection(sectionNum) {
+            const section = document.querySelector(`.section[data-section="${sectionNum}"]`);
+            const wasActive = section.classList.contains('active');
+
+            // Close all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+
+            // Open clicked section if it wasn't already open
+            if (!wasActive) {
+                section.classList.add('active');
+                currentSection = sectionNum;
+                updateBlueprintHighlight(sectionNum);
+            }
+        }
+
+        function goToSection(sectionNum) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            const section = document.querySelector(`.section[data-section="${sectionNum}"]`);
+            section.classList.add('active');
+            currentSection = sectionNum;
+            updateBlueprintHighlight(sectionNum);
+
+            // Scroll to put section title at top of viewport
+            setTimeout(() => {
+                const sectionRect = section.getBoundingClientRect();
+                const scrollTop = window.pageYOffset + sectionRect.top - 20; // Small offset from top
+                window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+            }, 50);
+        }
+
+        function proceedToSection(nextSection) {
+            // Mark current section as completed
+            completedSections.add(currentSection);
+            const currentSectionEl = document.querySelector(`.section[data-section="${currentSection}"]`);
+            currentSectionEl.classList.add('completed');
+            currentSectionEl.classList.remove('active');
+
+            // Update progress
+            updateProgress();
+
+            // Open next section
+            const nextSectionEl = document.querySelector(`.section[data-section="${nextSection}"]`);
+            nextSectionEl.classList.add('active');
+            currentSection = nextSection;
+
+            // Update blueprint
+            updateBlueprintHighlight(nextSection);
+            updateBlueprintContent();
+
+            // If moving to review section, populate the summary
+            if (nextSection === 8) {
+                populateReviewSummary();
+            }
+
+            // Scroll to put section header at top of viewport
+            // Wait for accordion animation (300ms transition) to complete
+            setTimeout(() => {
+                const sectionHeader = nextSectionEl.querySelector('.section-header');
+                const headerRect = sectionHeader.getBoundingClientRect();
+                const scrollTop = window.pageYOffset + headerRect.top - 20; // Small offset from top
+                window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+            }, 350);
+        }
+
+        // =================================================================
+        // PROGRESS TRACKING (UI removed, but still track internally)
+        // =================================================================
+
+        function updateProgress() {
+            // Progress bar UI was removed - the blueprint panel shows progress instead
+            // This function now just updates review checkmarks when applicable
+            updateReviewCheckmarks();
+        }
+
+        function updateReviewCheckmarks() {
+            // Update the review section checkmarks to show gold for completed sections
+            for (let i = 1; i <= 7; i++) {
+                const checkEl = document.getElementById(`review-check-${i}`);
+                if (checkEl && completedSections.has(i)) {
+                    checkEl.style.background = 'var(--gold)';
+                    checkEl.style.color = 'white';
+                    checkEl.textContent = '✓';
+                }
+            }
+        }
+
+        function populateReviewSummary() {
+            const form = document.getElementById('onboardingForm');
+
+            // Company name
+            const companyName = form.company_name?.value;
+            if (companyName) {
+                document.getElementById('review-company').textContent = companyName;
+            }
+
+            // Product
+            const coreProduct = form.core_product?.value;
+            if (coreProduct) {
+                document.getElementById('review-product').textContent = coreProduct.substring(0, 50) + (coreProduct.length > 50 ? '...' : '');
+            }
+
+            // Segments count
+            const segmentCount = segments.filter(s => s.name).length;
+            if (segmentCount > 0) {
+                document.getElementById('review-segments').textContent = `${segmentCount} segment${segmentCount > 1 ? 's' : ''} defined`;
+            }
+
+            // Personas count
+            const personaCount = personas.filter(p => p.job_title).length;
+            if (personaCount > 0) {
+                document.getElementById('review-personas').textContent = `${personaCount} persona${personaCount > 1 ? 's' : ''} defined`;
+            }
+
+            // Outbound tools
+            const toolCount = document.querySelectorAll('input[name="outbound_tools"]:checked').length;
+            if (toolCount > 0) {
+                document.getElementById('review-process').textContent = `${toolCount} tool${toolCount > 1 ? 's' : ''} selected`;
+            }
+
+            // Tone
+            const tone = form.tone_style?.value;
+            if (tone) {
+                document.getElementById('review-messaging').textContent = tone;
+            }
+
+            // Goal
+            const goal = form.primary_gtm_objective?.value;
+            if (goal) {
+                document.getElementById('review-goals').textContent = goal;
+            }
+
+            // Update blueprint review text
+            const bpReview = document.getElementById('bp-review');
+            if (bpReview) {
+                bpReview.textContent = 'Blueprint ready for submission';
+                bpReview.classList.remove('placeholder');
+                bpReview.classList.add('value');
+            }
+
+            // Update all checkmarks
+            updateReviewCheckmarks();
+        }
+
+        // =================================================================
+        // LIVE BLUEPRINT
+        // =================================================================
+
+        function updateBlueprintHighlight(sectionNum) {
+            document.querySelectorAll('.blueprint-section').forEach(bp => {
+                bp.classList.remove('active');
+                const bpNum = parseInt(bp.dataset.bp);
+                if (completedSections.has(bpNum)) {
+                    bp.classList.add('completed');
+                }
+            });
+            document.querySelector(`.blueprint-section[data-bp="${sectionNum}"]`).classList.add('active');
+        }
+
+        function updateBlueprintContent() {
+            const form = document.getElementById('onboardingForm');
+
+            // Section 1 - Foundation
+            const companyName = form.company_name.value;
+            const contactName = form.contact_name.value;
+            if (companyName) {
+                document.getElementById('bp-company').textContent = companyName;
+                document.getElementById('bp-company').classList.remove('placeholder');
+                document.getElementById('bp-company').classList.add('value');
+            }
+            if (contactName) {
+                document.getElementById('bp-contact').textContent = `Point of contact: ${contactName}`;
+                document.getElementById('bp-contact').classList.remove('placeholder');
+            }
+
+            // Section 2 - Core Substance
+            const coreProduct = form.core_product?.value;
+            const targetCustomer = form.target_customer?.value;
+            if (coreProduct) {
+                document.getElementById('bp-product').textContent = coreProduct.substring(0, 100) + (coreProduct.length > 100 ? '...' : '');
+                document.getElementById('bp-product').classList.remove('placeholder');
+            }
+            if (targetCustomer) {
+                document.getElementById('bp-target').textContent = targetCustomer.substring(0, 80) + (targetCustomer.length > 80 ? '...' : '');
+                document.getElementById('bp-target').classList.remove('placeholder');
+            }
+
+            // Show insight based on data
+            showInsightIfRelevant();
+        }
+
+        function showInsightIfRelevant() {
+            const insightEl = document.getElementById('blueprintInsight');
+            const insightText = document.getElementById('insightText');
+
+            // Show insight after completing section 2
+            if (completedSections.has(2)) {
+                const acv = document.querySelector('input[name="acv"]').value;
+                if (acv && acv.includes('25')) {
+                    insightEl.style.display = 'block';
+                    insightText.textContent = 'With a $25k+ ACV, multi-threading to 3+ stakeholders typically increases close rates by 40%. We\'ll build sequences accordingly.';
+                }
+            }
+        }
+
+        // =================================================================
+        // DYNAMIC SEGMENTS
+        // =================================================================
+
+        function addSegment() {
+            const index = segments.length;
+            segments.push({ name: '', revenue_pct: '', unique_characteristics: '' });
+
+            const container = document.getElementById('segmentsList');
+            const newSegment = document.createElement('div');
+            newSegment.className = 'dynamic-item';
+            newSegment.dataset.index = index;
+            newSegment.innerHTML = `
+                <div class="dynamic-item-header">
+                    <span class="dynamic-item-title">Segment ${index + 1}</span>
+                    <button type="button" class="dynamic-item-remove" onclick="removeSegment(${index})">✕</button>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Segment Name</label>
+                        <input type="text" class="form-input" name="segments[${index}].name" placeholder="e.g., SMB Tech">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">% of Revenue</label>
+                        <input type="number" class="form-input" name="segments[${index}].revenue_pct" placeholder="e.g., 30" min="0" max="100">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">What makes this segment unique?</label>
+                        <input type="text" class="form-input" name="segments[${index}].unique_characteristics" placeholder="Key characteristics or needs">
+                    </div>
+                </div>
+            `;
+            container.appendChild(newSegment);
+
+            // Show remove buttons when there's more than one
+            if (segments.length > 1) {
+                document.querySelectorAll('.dynamic-item-remove').forEach(btn => btn.style.display = 'block');
+            }
+        }
+
+        function removeSegment(index) {
+            if (segments.length <= 1) return;
+            segments.splice(index, 1);
+            rebuildSegmentsList();
+        }
+
+        function rebuildSegmentsList() {
+            const container = document.getElementById('segmentsList');
+            container.innerHTML = '';
+            segments.forEach((seg, index) => {
+                const item = document.createElement('div');
+                item.className = 'dynamic-item';
+                item.dataset.index = index;
+                item.innerHTML = `
+                    <div class="dynamic-item-header">
+                        <span class="dynamic-item-title">Segment ${index + 1}</span>
+                        <button type="button" class="dynamic-item-remove" onclick="removeSegment(${index})" style="${segments.length > 1 ? '' : 'display: none;'}">✕</button>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Segment Name</label>
+                            <input type="text" class="form-input" name="segments[${index}].name" placeholder="e.g., Enterprise SaaS" value="${seg.name || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">% of Revenue</label>
+                            <input type="number" class="form-input" name="segments[${index}].revenue_pct" placeholder="e.g., 60" min="0" max="100" value="${seg.revenue_pct || ''}">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">What makes this segment unique?</label>
+                            <input type="text" class="form-input" name="segments[${index}].unique_characteristics" placeholder="Key characteristics or needs" value="${seg.unique_characteristics || ''}">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // =================================================================
+        // DYNAMIC PERSONAS
+        // =================================================================
+
+        function addPersona() {
+            const index = personas.length;
+            personas.push({ job_title: '', primary_segment: '', pain_before_buying: '', aha_moment: '' });
+
+            const container = document.getElementById('personasList');
+            const newPersona = document.createElement('div');
+            newPersona.className = 'dynamic-item';
+            newPersona.dataset.index = index;
+            newPersona.innerHTML = `
+                <div class="dynamic-item-header">
+                    <span class="dynamic-item-title">Persona ${index + 1}</span>
+                    <button type="button" class="dynamic-item-remove" onclick="removePersona(${index})">✕</button>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" class="form-input" name="personas[${index}].job_title" placeholder="e.g., Head of Marketing">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Primary Segment</label>
+                        <input type="text" class="form-input" name="personas[${index}].primary_segment" placeholder="Which segment?">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">What pain do they feel before buying?</label>
+                        <input type="text" class="form-input" name="personas[${index}].pain_before_buying" placeholder="Their key frustrations">
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">What's their "aha moment" with your product?</label>
+                        <input type="text" class="form-input" name="personas[${index}].aha_moment" placeholder="When they realize the value">
+                    </div>
+                </div>
+            `;
+            container.appendChild(newPersona);
+
+            if (personas.length > 1) {
+                document.querySelectorAll('#personasList .dynamic-item-remove').forEach(btn => btn.style.display = 'block');
+            }
+        }
+
+        function removePersona(index) {
+            if (personas.length <= 1) return;
+            personas.splice(index, 1);
+            rebuildPersonasList();
+        }
+
+        function rebuildPersonasList() {
+            const container = document.getElementById('personasList');
+            container.innerHTML = '';
+            personas.forEach((persona, index) => {
+                const item = document.createElement('div');
+                item.className = 'dynamic-item';
+                item.dataset.index = index;
+                item.innerHTML = `
+                    <div class="dynamic-item-header">
+                        <span class="dynamic-item-title">Persona ${index + 1}</span>
+                        <button type="button" class="dynamic-item-remove" onclick="removePersona(${index})" style="${personas.length > 1 ? '' : 'display: none;'}">✕</button>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Job Title</label>
+                            <input type="text" class="form-input" name="personas[${index}].job_title" placeholder="e.g., VP of Sales" value="${persona.job_title || ''}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Primary Segment</label>
+                            <input type="text" class="form-input" name="personas[${index}].primary_segment" placeholder="Which segment?" value="${persona.primary_segment || ''}">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">What pain do they feel before buying?</label>
+                            <input type="text" class="form-input" name="personas[${index}].pain_before_buying" placeholder="Their key frustrations" value="${persona.pain_before_buying || ''}">
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">What's their "aha moment" with your product?</label>
+                            <input type="text" class="form-input" name="personas[${index}].aha_moment" placeholder="When they realize the value" value="${persona.aha_moment || ''}">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // =================================================================
+        // TAG INPUT (Job Titles)
+        // =================================================================
+
+        document.getElementById('jobTitleInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const value = this.value.trim();
+                if (value && !jobTitles.includes(value)) {
+                    jobTitles.push(value);
+                    renderJobTitles();
+                    this.value = '';
+                }
+            }
+        });
+
+        function renderJobTitles() {
+            const container = document.getElementById('jobTitlesContainer');
+            const input = document.getElementById('jobTitleInput');
+
+            // Remove existing tags
+            container.querySelectorAll('.tag').forEach(tag => tag.remove());
+
+            // Add tags before the input
+            jobTitles.forEach((title, index) => {
+                const tag = document.createElement('span');
+                tag.className = 'tag';
+                tag.innerHTML = `${title}<button type="button" class="tag-remove" onclick="removeJobTitle(${index})">×</button>`;
+                container.insertBefore(tag, input);
+            });
+
+            // Update hidden input
+            document.getElementById('jobTitlesHidden').value = JSON.stringify(jobTitles);
+        }
+
+        function removeJobTitle(index) {
+            jobTitles.splice(index, 1);
+            renderJobTitles();
+        }
+
+        // =================================================================
+        // CHECKBOX STYLING
+        // =================================================================
+
+        document.querySelectorAll('.checkbox-item input').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                this.closest('.checkbox-item').classList.toggle('checked', this.checked);
+            });
+        });
+
+        // =================================================================
+        // FORM SUBMISSION
+        // =================================================================
+
+        document.getElementById('onboardingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+
+            // Basic fields
+            for (const [key, value] of formData.entries()) {
+                if (!key.includes('[')) {
+                    data[key] = value;
+                }
+            }
+
+            // Collect segments
+            data.segments = [];
+            document.querySelectorAll('#segmentsList .dynamic-item').forEach((item, i) => {
+                const segment = {
+                    name: item.querySelector(`[name="segments[${i}].name"]`)?.value || '',
+                    revenue_pct: parseInt(item.querySelector(`[name="segments[${i}].revenue_pct"]`)?.value) || 0,
+                    unique_characteristics: item.querySelector(`[name="segments[${i}].unique_characteristics"]`)?.value || '',
+                    primary_use_case: ''
+                };
+                if (segment.name) data.segments.push(segment);
+            });
+
+            // Collect personas
+            data.personas = [];
+            document.querySelectorAll('#personasList .dynamic-item').forEach((item, i) => {
+                const persona = {
+                    job_title: item.querySelector(`[name="personas[${i}].job_title"]`)?.value || '',
+                    primary_segment: item.querySelector(`[name="personas[${i}].primary_segment"]`)?.value || '',
+                    pain_before_buying: item.querySelector(`[name="personas[${i}].pain_before_buying"]`)?.value || '',
+                    aha_moment: item.querySelector(`[name="personas[${i}].aha_moment"]`)?.value || '',
+                    messaging_angle: ''
+                };
+                if (persona.job_title) data.personas.push(persona);
+            });
+
+            // Collect job titles
+            data.job_titles = jobTitles;
+
+            // Collect signals (checkboxes)
+            data.signals = [];
+            document.querySelectorAll('input[name="signals"]:checked').forEach(cb => {
+                data.signals.push(cb.value);
+            });
+
+            // Collect outbound tools (checkboxes)
+            data.outbound_tools = [];
+            document.querySelectorAll('input[name="outbound_tools"]:checked').forEach(cb => {
+                data.outbound_tools.push(cb.value);
+            });
+
+            // Convert self_serve_pct to int
+            if (data.self_serve_pct) {
+                data.self_serve_pct = parseInt(data.self_serve_pct);
+            }
+
+            // Other arrays that need to be arrays
+            data.custom_signals = [];
+            data.other_channels = data.other_channels ? data.other_channels.split(',').map(s => s.trim()).filter(Boolean) : [];
+            data.key_differentiators = [];
+            data.competitors = [];
+
+            try {
+                const response = await fetch('/onboarding/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Show success state
+                    document.querySelector('.form-pane').innerHTML = `
+                        <div style="text-align: center; padding: 80px 40px;">
+                            <div style="font-size: 64px; margin-bottom: 24px;">✦</div>
+                            <h1 style="font-family: 'DM Serif Display', serif; font-size: 36px; margin-bottom: 16px; color: var(--text-primary);">Blueprint Complete</h1>
+                            <p style="font-size: 18px; color: var(--text-secondary); max-width: 480px; margin: 0 auto 32px;">
+                                Thank you! Your campaign blueprint has been received. Our team will review your inputs and begin crafting your growth formula.
+                            </p>
+                            <p style="font-size: 14px; color: var(--text-muted);">
+                                Submission ID: ${result.submission_id}
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    alert('There was an error submitting your blueprint. Please try again.');
+                }
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('There was an error submitting your blueprint. Please try again.');
+            }
+        });
+
+        // =================================================================
+        // INITIALIZATION
+        // =================================================================
+
+        // Update blueprint when inputs change
+        document.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('change', updateBlueprintContent);
+            input.addEventListener('input', updateBlueprintContent);
+        });
+
+        // Initialize progress
+        updateProgress();
+    </script>
+</body>
+</html>
