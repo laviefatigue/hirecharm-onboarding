@@ -202,8 +202,8 @@ async def submit_onboarding(submission: OnboardingSubmission):
                 client_id = str(uuid4())
                 session.execute(
                     text("""
-                        INSERT INTO clients (id, name, onboarding_complete, created_at)
-                        VALUES (:id, :name, FALSE, NOW())
+                        INSERT INTO clients (id, name, created_at)
+                        VALUES (:id, :name, NOW())
                     """),
                     {"id": client_id, "name": submission.company_name}
                 )
