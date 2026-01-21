@@ -2040,6 +2040,11 @@
             const formData = new FormData(this);
             const data = {};
 
+            // Include client_id from URL if present
+            if (clientIdFromUrl) {
+                data.client_id = clientIdFromUrl;
+            }
+
             // Basic fields
             for (const [key, value] of formData.entries()) {
                 if (!key.includes('[')) {
@@ -2135,6 +2140,11 @@
         // =================================================================
         // INITIALIZATION
         // =================================================================
+
+        // Capture client_id from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientIdFromUrl = urlParams.get('client_id');
+        console.log('Client ID from URL:', clientIdFromUrl);
 
         // Update blueprint when inputs change
         document.querySelectorAll('input, textarea, select').forEach(input => {
